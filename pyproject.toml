@@ -1,0 +1,22 @@
+[project]
+name = "mydjangoproject"
+version = "0.1.0"
+description = "My first Django project"
+authors = [
+    {name = "prs2rnn",email = "developer.prs2rnn@gmail.com"}
+]
+license = {text = "MIT"}
+requires-python = ">=3.14"
+dependencies = [
+    "django (>=6.0.5,<7.0.0)"
+]
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.0.3,<10.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
