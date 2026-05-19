@@ -10,4 +10,5 @@
     {% else %}
         <p>Заметок пока нет</p>
     {% endif %}
+    <a href="{% url 'note_create' %}" class="btn btn-success mb-3">➕ Добавить заметку</a>
 {% endblock %}
