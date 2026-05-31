@@ -7,7 +7,7 @@
   {% for note in notes %}
   <a
     href="{% url 'note_detail' note.id %}"
-    class="list-group-item list-group-item-action mt-1 d-flex justify-content-between border-0 border-start border-success border-3"
+    class="list-group-item list-group-item-action mt-1 d-flex justify-content-between border-0 border-start border-primary border-3"
   >
     <p class="mb-0"><b>{{note.title}}</b></p>
     <span class="text-muted">{{ note.created_at|date }}</span>
