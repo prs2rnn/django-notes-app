@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div>
-  <a href="{% url 'note_edit' note.id %}" class="btn btn-warning btn-sm">✏ Edit</a>
-  <a href="{% url 'note_delete' note.id %}" class="btn btn-danger btn-sm ms-2">🗑️ Delete</a>
-</div>
-<div class="card mt-3">
-  <div class="card-body">
-    <h3 class="card-title fw-bold">{{note.title}}</h3>
-    <p class="card-text mt-2 note-body">{{note.body}}</p>
-    <hr />
-    <small class="text-muted">
-      Created: {{ note.created_at }}
-      <br />
-      Updated: {{ note.updated_at }}
-    </small>
+  <div>
+    <a href="{% url 'note_edit' note.id %}" class="btn btn-warning btn-sm">✏ Edit</a>
+    <a href="{% url 'note_delete' note.id %}"
+       class="btn btn-danger btn-sm ms-2">🗑️ Delete</a>
   </div>
-</div>
-<div class="text-center">
-  <a href="{% url 'notes_list' %}" class="btn btn-secondary my-3">🔙 Back to the list</a>
-</div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h3 class="card-title fw-bold">{{ note.title }}</h3>
+      <p class="card-text mt-2 note-body">{{ note.body }}</p>
+      <hr />
+      <small class="text-muted">
+        Created: {{ note.created_at }}
+        <br />
+        Updated: {{ note.updated_at }}
+      </small>
+    </div>
+  </div>
+  <div class="text-center">
+    <a href="{% url 'notes_list' %}" class="btn btn-secondary my-3">🔙 Back to the list</a>
+  </div>
 {% endblock content %}

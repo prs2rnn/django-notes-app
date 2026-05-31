@@ -1,48 +1,37 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h2 class="h2">{{ title }}</h2>
-<form method="post">
-  {% csrf_token %}
-
-  {% if form.non_field_errors %}
-  <div class="alert alert-danger">
-    {% for error in form.non_field_errors %}
-    {{ error }}
+  <h2 class="h2">{{ title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+      </div>
+    {% endif %}
+    {% for field in form %}
+      <div class="mb-2">
+        <label for="{{ field.id_for_label }}" class="form-label fw-bold m-0 mb-1">{{ field.label }}</label>
+        {{ field }}
+        {# Errors #}
+        {% for error in field.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+      </div>
     {% endfor %}
-  </div>
-  {% endif %}
-  {% for field in form %}
-  <div class="mb-2">
-    <label for="{{ field.id_for_label }}" class="form-label fw-bold m-0 mb-1">
-      {{ field.label }}
-    </label>
-    {{ field }}
-    {# Errors #}
-    {% for error in field.errors %}
-    <div class="text-danger small mt-1">
-      {{ error }}
+    <div class="bg-opacity-25 bg-warning p-3 rounded mt-3 text-muted">
+      <strong>Important:</strong>
+      The title and body of the note are required
     </div>
-    {% endfor %}
-  </div>
-  {% endfor %}
-
-  <div class="bg-opacity-25 bg-warning p-3 rounded mt-3 text-muted">
-    <strong>Important:</strong>
-    The title and body of the note are required
-  </div>
-  <div class="my-3 d-flex justify-content-between">
-    <div>
-      <button type="submit" class="btn btn-success">Save</button>
-      <button type="reset" class="btn btn-warning ms-2">Reset</button>
+    <div class="my-3 d-flex justify-content-between">
+      <div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="reset" class="btn btn-warning ms-2">Reset</button>
+      </div>
+      <div>
+        {% if note %}
+          <a href="{% url 'note_detail' note.id %}" class="btn btn-secondary">Undo</a>
+        {% else %}
+          <a href="{% url 'notes_list' %}" class="btn btn-secondary">Undo</a>
+        {% endif %}
+      </div>
     </div>
-    <div>
-      {% if note %}
-      <a href="{% url 'note_detail' note.id %}" class="btn btn-secondary">Undo</a>
-      {% else %}
-      <a href="{{ title }}1" class="btn btn-secondary">Undo</a>
-      {% endif %}
-    </div>
-  </div>
-</form>
+  </form>
 {% endblock content %}

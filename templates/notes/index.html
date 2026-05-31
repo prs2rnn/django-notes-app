@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<a href="{% url 'note_create' %}" class="btn btn-success mt-1">➕ Add note</a>
-{% if notes %}
-<ul class="list-group list-group-flush my-3">
-  {% for note in notes %}
-  <a
-    href="{% url 'note_detail' note.id %}"
-    class="list-group-item list-group-item-action mt-1 d-flex justify-content-between border-0 border-start border-primary border-3"
-  >
-    <p class="mb-0"><b>{{note.title}}</b></p>
-    <span class="text-muted">{{ note.created_at|date }}</span>
-  </a>
-  {% endfor %}
-</ul>
-{% else %}
-<p class="my-2">There aren't notes yet</p>
-{% endif %}
+  <a href="{% url 'note_create' %}" class="btn btn-success mt-1">➕ Add note</a>
+  {% if notes %}
+    <ul class="list-group list-group-flush my-3">
+      {% for note in notes %}
+        <a href="{% url 'note_detail' note.id %}"
+           class="list-group-item list-group-item-action mt-1 d-flex justify-content-between">
+          <p class="mb-0">
+            <b>{{ note.title }}</b>
+          </p>
+          <span class="text-muted">{{ note.created_at|date }}</span>
+        </a>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="my-2">There aren't notes yet</p>
+  {% endif %}
 {% endblock content %}
