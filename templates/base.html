@@ -8,15 +8,28 @@
       name="description"
       content="This is my Django app for taking notes."
     />
-    <title>Notes App</title>
+    <title>My Notes</title>
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png" />
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg text-primary fw-bold">
+    <nav class="navbar">
       <div class="container">
-        <a href="{% url 'notes_list' %}" class="navbar-brand">Notes App</a>
+        <a
+          href="{% url 'notes_list' %}"
+          class="navbar-brand text-uppercase"
+          style="color: black"
+        >
+          <img
+            src="{% static 'img/logo.webp' %}"
+            alt=""
+            width="30"
+            height="24"
+            class="d-inline-block align-text-top"
+          />
+          My Notes
+        </a>
       </div>
     </nav>
     <main>
