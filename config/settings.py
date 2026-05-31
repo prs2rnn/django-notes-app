@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notes',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,6 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-# Redirects: after login: accounts/login/ -> notes/
-LOGIN_REDIRECT_URL = '/notes/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+# Redirects for LogoutView and LoginView
+LOGIN_REDIRECT_URL = 'notes_list'
+LOGOUT_REDIRECT_URL = 'login'

@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
@@ -7,21 +8,21 @@ from .models import Note
 
 
 @login_required
-def notes_list(request):
+def notes_list(request: HttpRequest):
     notes = Note.objects.filter(author=request.user)
 
     return render(request, 'notes/index.html', {'notes': notes})
 
 
 @login_required
-def note_detail(request, note_id):
+def note_detail(request: HttpRequest, note_id):
     note = get_object_or_404(Note, pk=note_id, author=request.user)
 
     return render(request, 'notes/detail.html', {'note': note})
 
 
 @login_required
-def note_create(request):
+def note_create(request: HttpRequest):
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
@@ -35,7 +36,7 @@ def note_create(request):
 
 
 @login_required
-def note_edit(request, note_id):
+def note_edit(request: HttpRequest, note_id):
     note = get_object_or_404(Note, pk=note_id, author=request.user)
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
@@ -52,7 +53,7 @@ def note_edit(request, note_id):
 
 @require_http_methods(['GET', 'POST'])
 @login_required
-def note_delete(request, note_id):
+def note_delete(request: HttpRequest, note_id):
     note = get_object_or_404(Note, pk=note_id, author=request.user)
 
     if request.method == 'POST':

@@ -23,5 +23,5 @@ urlpatterns = [
     path('', RedirectView.as_view(url='notes/')),
     path('admin/', admin.site.urls),
     path('notes/', include('notes.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
