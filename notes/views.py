@@ -29,7 +29,7 @@ def note_create(request: HttpRequest):
             note = form.save(commit=False)
             note.author = request.user
             note.save()
-            return redirect('note_detail', note_id=note.id)
+            return redirect('notes_list')
     else:
         form = NoteForm()
     return render(request, 'notes/form.html', {'form': form, 'title': 'Create note'})

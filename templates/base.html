@@ -7,7 +7,7 @@
     <meta name="description" content="This is my Django app for taking notes." />
     <title>NoteFlow</title>
     <link rel="shortcut icon"
-          href="{% static 'img/icon.svg' %}"
+          href="{% static 'img/favicon.svg' %}"
           type="image/svg" />
     <link rel="stylesheet"
           href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
@@ -17,18 +17,18 @@
   <body>
     <nav class="navbar">
       <div class="container">
-        <div class="d-flex align-items-center">
-          <a href="{% url 'home' %}" class="navbar-brand fw-semibold">NoteFlow</a>
+        <div class="d-flex align-items-sm-center flex-column flex-sm-row">
+          <a href="{% url 'home' %}" class="navbar-brand fw-semibold pb-0 pb-sm-2">NoteFlow</a>
           <ul class="navbar-nav flex-row gap-3">
             <li class="nav-item">
               <a href="{% url 'home' %}"
-                 class="nav-link
+                 class="nav-link pt-0 pt-sm-2
                         {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
             </li>
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <a href="{% url 'notes_list' %}"
-                   class="nav-link
+                   class="nav-link pt-0 pt-sm-2
                           {% if request.resolver_match.url_name == 'notes_list' %}active{% endif %}">Notes</a>
               </li>
             {% endif %}
@@ -68,7 +68,7 @@
     </main>
     <footer class="border-top py-4 text-center">
       <div class="container">
-        <p>&copy; Andrey Perestoronin, 2026</p>
+        <p>&copy; 2026, Andrey Perestoronin</p>
       </div>
     </footer>
   </body>

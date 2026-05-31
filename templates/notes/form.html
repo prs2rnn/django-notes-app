@@ -16,10 +16,6 @@
         {% for error in field.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
       </div>
     {% endfor %}
-    <div class="bg-opacity-25 bg-warning p-3 rounded mt-3 text-muted">
-      <strong>Important:</strong>
-      The title and body of the note are required
-    </div>
     <div class="my-3 d-flex justify-content-between">
       <div>
         <button type="submit" class="btn btn-success">Save</button>
