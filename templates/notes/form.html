@@ -4,25 +4,29 @@
 <h2 class="h2">{{ title }}</h2>
 <form method="post">
   {% csrf_token %}
-  <div class="mb-2">
-    <label for="{{ form.title.id_for_label }}" class="form-label fw-bold m-0 mb-1">
-      {{ form.title.label }}
-      {% if form.title.field.required %}
-      <span class="text-danger">*</span>
-      {% endif %}
-    </label>
-    {{ form.title }}
-    <div class="form-text">Max length: 100 symbols</div>
+
+  {% if form.non_field_errors %}
+  <div class="alert alert-danger">
+    {% for error in form.non_field_errors %}
+    {{ error }}
+    {% endfor %}
   </div>
+  {% endif %}
+  {% for field in form %}
   <div class="mb-2">
-    <label for="{{ form.title.id_for_label }}" class="form-label fw-bold m-0 mb-1">
-      {{ form.body.label }}
-      {% if form.title.field.required %}
-      <span class="text-danger">*</span>
-      {% endif %}
+    <label for="{{ field.id_for_label }}" class="form-label fw-bold m-0 mb-1">
+      {{ field.label }}
     </label>
-    {{ form.body }}
+    {{ field }}
+    {# Errors #}
+    {% for error in field.errors %}
+    <div class="text-danger small mt-1">
+      {{ error }}
+    </div>
+    {% endfor %}
   </div>
+  {% endfor %}
+
   <div class="bg-opacity-25 bg-warning p-3 rounded mt-3 text-muted">
     <strong>Important:</strong>
     The title and body of the note are required
@@ -36,7 +40,7 @@
       {% if note %}
       <a href="{% url 'note_detail' note.id %}" class="btn btn-secondary">Undo</a>
       {% else %}
-      <a href="{% url 'notes_list' %}" class="btn btn-secondary">Undo</a>
+      <a href="{{ title }}1" class="btn btn-secondary">Undo</a>
       {% endif %}
     </div>
   </div>
