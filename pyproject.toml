@@ -1,5 +1,5 @@
 [project]
-name = "notes-app"
+name = "django-notes-app"
 version = "0.1.0"
 description = "A django app for taking notes"
 authors = [
