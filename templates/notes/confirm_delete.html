@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-  <h2>Delete note: "{{ note.title }}"?</h2>
-  <form method="post">
-    {% csrf_token %}
-    <div class="my-3">
-      <button type="submit" class="btn btn-danger">Yes, delete</button>
-      <a href="{% url 'note_detail' note.id %}" class="btn btn-secondary ms-2">Undo</a>
-    </div>
-  </form>
+<div class="px-2">
+  <div
+    class="container bg-danger bg-opacity-25 p-3 my-2 rounded border border-danger"
+  >
+    <h2>Deleting a note</h2>
+    <p class="border-bottom pb-2">You are going to delete: "{{ note.title }}"?</p>
+    <small class="text-muted">Created at: {{note.created_at}}</small>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="mt-2">
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="{% url 'note_detail' note.id %}" class="btn btn-secondary ms-2">Undo</a>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock content %}

@@ -2,17 +2,21 @@
 
 {% block content %}
 <div class="container">
+  <a href="{% url 'note_create' %}" class="btn btn-success mt-1">➕ Add note</a>
   {% if notes %}
-  <ul class="list-group list-group-flush">
+  <ul class="list-group list-group-flush my-3">
     {% for note in notes %}
-    <a href="{% url 'note_detail' note.id %}" class="list-group-item list-group-item-action mt-1">
-      {{note.title}}
+    <a
+      href="{% url 'note_detail' note.id %}"
+      class="list-group-item list-group-item-action mt-1 d-flex justify-content-between"
+    >
+      <b>{{note.title}}</b>
+      <span class="text-muted">{{ note.created_at|date }}</span>
     </a>
     {% endfor %}
   </ul>
   {% else %}
   <p>There aren't notes yet</p>
   {% endif %}
-  <a href="{% url 'note_create' %}" class="btn btn-success my-3">➕ Add note</a>
 </div>
 {% endblock content %}
