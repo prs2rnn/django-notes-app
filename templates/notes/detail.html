@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">{{note.title}}</h3>
-            <p class="card-text">{{note.body}}</p>
-            <small class="text-muted">Создано: {{note.created_at|date:"d.m.Y H:i"}}</small>
-        </div>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title fw-bold">{{note.title}}</h3>
+      <small class="text-muted">Created at: {{note.created_at}}</small>
+      <p class="card-text mt-2 note-body">{{note.body}}</p>
     </div>
-    <br>
-    <a href="{% url 'notes_list' %}">🔙 Назад к списку</a>
-    <a href="{% url 'note_edit' note.id %}" class="btn btn-warning">✏ Редактировать</a>
-    <a href="{% url 'note_delete' note.id %}" class="btn btn-danger ms-2">🗑️ Удалить</a>
-{% endblock %}
+  </div>
+  <div class="my-2">
+    <a href="{% url 'note_edit' note.id %}" class="btn btn-warning">✏ Edit</a>
+    <a href="{% url 'note_delete' note.id %}" class="btn btn-danger ms-2">🗑️ Delete</a>
+  </div>
+  <a href="{% url 'notes_list' %}" class="btn btn-primary mt-3 mb-2">
+    🔙 Back to the list
+  </a>
+</div>
+{% endblock content %}

@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Удалить заметку: "{{ note.title }}"?</h2>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Да, удалить</button>
-        <a href="{% url 'note_detail' note.id %}" class="btn btn-secondary ms-2">Отмена</a>
-    </form>
-{% endblock %}
+<div class="container">
+  <h2>Delete note: "{{ note.title }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="my-3">
+      <button type="submit" class="btn btn-danger">Yes, delete</button>
+      <a href="{% url 'note_detail' note.id %}" class="btn btn-secondary ms-2">Undo</a>
+    </div>
+  </form>
+</div>
+{% endblock content %}

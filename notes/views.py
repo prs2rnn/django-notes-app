@@ -40,9 +40,7 @@ def note_edit(request, note_id):
     else:
         form = NoteForm(instance=note)
 
-    return render(
-        request, 'notes/form.html', {'form': form, 'title': 'Редактировать заметку'}
-    )
+    return render(request, 'notes/form.html', {'form': form, 'note': note})
 
 
 @require_http_methods(['GET', 'POST'])
