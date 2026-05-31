@@ -9,8 +9,15 @@
   <div class="card mt-3">
     <div class="card-body">
       <h3 class="card-title fw-bold">{{note.title}}</h3>
-      <small class="text-muted">Created at: {{note.created_at}}</small>
       <p class="card-text mt-2 note-body">{{note.body}}</p>
+      <hr />
+      <small class="text-muted">
+        Author: {{ note.author }}
+        <br />
+        Created: {{ note.created_at }}
+        <br />
+        Updated: {{ note.updated_at }}
+      </small>
     </div>
   </div>
   <div class="text-center">

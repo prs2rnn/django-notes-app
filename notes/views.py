@@ -21,8 +21,8 @@ def note_create(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('notes_list')
+            note = form.save()
+            return redirect('note_detail', note_id=note.id)
     else:
         form = NoteForm()
     return render(request, 'notes/form.html', {'form': form, 'title': 'Create note'})

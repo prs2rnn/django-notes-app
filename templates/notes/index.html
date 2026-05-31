@@ -8,15 +8,18 @@
     {% for note in notes %}
     <a
       href="{% url 'note_detail' note.id %}"
-      class="list-group-item list-group-item-action mt-1 d-flex justify-content-between"
+      class="list-group-item list-group-item-action mt-1 d-flex justify-content-between border-start border-success"
     >
-      <b>{{note.title}}</b>
+      <div class="d-flex">
+        <p class="mb-0"><b>{{note.title}}</b></p>
+        <p class="ms-3 mb-0">| Author: {{ note.author }}</p>
+      </div>
       <span class="text-muted">{{ note.created_at|date }}</span>
     </a>
     {% endfor %}
   </ul>
   {% else %}
-  <p>There aren't notes yet</p>
+  <p class="my-2">There aren't notes yet</p>
   {% endif %}
 </div>
 {% endblock content %}

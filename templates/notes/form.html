@@ -25,6 +25,18 @@
       </label>
       {{ form.body }}
     </div>
+    <div class="mb-2">
+      <label for="{{ form.author.id_for_label }}" class="form-label fw-bold m-0 mb-1">
+        {{ form.author.label }}
+        {% if form.author.field.required %}
+        <span class="text-danger">*</span>
+        {% endif %}
+      </label>
+      {{ form.author }}
+      <div class="form-text">
+        Default name is "Anonymous". You can specify another
+      </div>
+    </div>
     <div class="bg-opacity-25 bg-warning p-3 rounded mt-3 text-muted">
       <strong>Important:</strong>
       The title and body of the note are required
