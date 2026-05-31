@@ -1,7 +1,7 @@
 [project]
-name = "mydjangoproject"
+name = "notes-app"
 version = "0.1.0"
-description = "My first Django project"
+description = "A django app for taking notes"
 authors = [
     {name = "prs2rnn",email = "developer.prs2rnn@gmail.com"}
 ]
