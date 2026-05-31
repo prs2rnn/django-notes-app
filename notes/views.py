@@ -25,9 +25,7 @@ def note_create(request):
             return redirect('notes_list')
     else:
         form = NoteForm()
-    return render(
-        request, 'notes/form.html', {'form': form, 'title': 'Создать заметку'}
-    )
+    return render(request, 'notes/form.html', {'form': form, 'title': 'Create note'})
 
 
 def note_edit(request, note_id):
@@ -40,7 +38,9 @@ def note_edit(request, note_id):
     else:
         form = NoteForm(instance=note)
 
-    return render(request, 'notes/form.html', {'form': form, 'note': note})
+    return render(
+        request, 'notes/form.html', {'form': form, 'note': note, 'title': 'Edit note'}
+    )
 
 
 @require_http_methods(['GET', 'POST'])
