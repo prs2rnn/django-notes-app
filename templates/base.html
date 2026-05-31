@@ -9,7 +9,7 @@
       content="This is my Django app for taking notes."
     />
     <title>My Notes</title>
-    <link rel="shortcut icon" href="{% static 'img/logo.svg' %}" type="image/svg" />
+    <link rel="shortcut icon" href="{% static 'img/icon.svg' %}" type="image/svg" />
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
@@ -18,11 +18,10 @@
       <div class="container">
         <a
           href="{% url 'notes_list' %}"
-          class="navbar-brand text-uppercase"
-          style="color: black"
+          class="navbar-brand text-uppercase fw-bold"
         >
           <img
-            src="{% static 'img/logo.svg' %}"
+            src="{% static 'img/icon.svg' %}"
             alt=""
             width="30"
             height="24"
