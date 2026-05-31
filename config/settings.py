@@ -119,3 +119,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+# Redirects: after login: accounts/login/ -> notes/
+LOGIN_REDIRECT_URL = '/notes/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'

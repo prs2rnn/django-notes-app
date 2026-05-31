@@ -11,7 +11,7 @@
     <p class="card-text mt-2 note-body">{{note.body}}</p>
     <hr />
     <small class="text-muted">
-      Author: {{ note.author }}
+      Author: {{ request.user.username }}
       <br />
       Created: {{ note.created_at }}
       <br />

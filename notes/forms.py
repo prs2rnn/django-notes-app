@@ -6,11 +6,10 @@ from .models import Note
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ['title', 'body', 'author']
+        fields = ['title', 'body']
         labels = {
             'title': 'Note title',
             'body': 'Note body',
-            'author': 'Your name (optional)',
         }
         widgets = {
             'title': forms.TextInput(
@@ -24,11 +23,6 @@ class NoteForm(forms.ModelForm):
                     'class': 'form-control',
                     'rows': 5,
                     'placeholder': 'Enter the text of the note...',
-                }
-            ),
-            'author': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
                 }
             ),
         }

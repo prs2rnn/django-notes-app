@@ -11,7 +11,7 @@
   >
     <div class="d-flex">
       <p class="mb-0"><b>{{note.title}}</b></p>
-      <p class="ms-3 mb-0">| Author: {{ note.author }}</p>
+      <p class="ms-3 mb-0">| Author: {{ request.user.username }}</p>
     </div>
     <span class="text-muted">{{ note.created_at|date }}</span>
   </a>
