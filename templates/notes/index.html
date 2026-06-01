@@ -14,9 +14,9 @@
       </div>
     </form>
   </div>
-  {% if notes %}
+  {% if page_obj %}
     <ul class="list-group my-2 my-sm-3">
-      {% for note in notes %}
+      {% for note in page_obj %}
         <a href="{% url 'note_detail' note.id %}"
            class="list-group-item list-group-item-action mt-1 d-flex justify-content-between">
           <p class="mb-0">
@@ -29,4 +29,25 @@
   {% else %}
     <p class="my-2">No notes found</p>
   {% endif %}
+  <nav class='mt-3'>
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}"
+             class="page-link"><i class="bi bi-chevron-left"></i></a>
+        </li>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+          <a href="?q={{ query }}&page={{ num }}" class="page-link">{{ num }}</a>
+        </li>
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a href="?q={{ query }}&page={{ page_obj.next_page_number }}"
+             class="page-link"><i class="bi bi-chevron-right"></i></a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 {% endblock content %}

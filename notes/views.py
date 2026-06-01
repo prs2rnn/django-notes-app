@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
@@ -12,10 +13,16 @@ from .models import Note
 @login_required
 def notes_list(request: HttpRequest):
     query = request.GET.get('q', '')
-    notes = Note.objects.filter(author=request.user)
+    notes = Note.objects.filter(author=request.user).order_by('-created_at')
+
     if query:
         notes = notes.filter(Q(title__icontains=query) | Q(body__icontains=query))
-    return render(request, 'notes/index.html', {'notes': notes, 'query': query})
+
+    paginator = Paginator(notes, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'notes/index.html', {'page_obj': page_obj, 'query': query})
 
 
 @login_required
