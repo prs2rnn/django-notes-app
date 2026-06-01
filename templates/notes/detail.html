@@ -10,7 +10,9 @@
       <h3 class="card-title fw-bold">{{ note.title }}</h3>
       <p class="card-text mt-2 note-body">{{ note.body }}</p>
       <hr />
+      <span class="badge bg-secondary mb-2">{{ note.body|length }} symbols</span>
       <small class="text-muted">
+        <br />
         Created: {{ note.created_at|date:"M d, Y H:i" }}
         <br />
         Updated: {{ note.updated_at|date:"M d, Y H:i" }}

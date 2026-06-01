@@ -6,14 +6,14 @@
       <h2>Profile</h2>
       <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
-        <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-8 text-center mx-auto">
             <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'img/default-avatar.webp' %}{% endif %}"
                  id="avatar-preview"
                  alt="Avatar"
                  data-default-avatar="{% static 'img/default-avatar.webp' %}"
                  data-has-avatar="{% if user.profile.avatar %}true{% else %}false{% endif %}"
                  style="object-fit: cover"
+                 class="rounded-1 border rounded-circle"
                  width="150"
                  height="150">
             <div class="mt-1">
@@ -27,7 +27,7 @@
 
             </div>
           </div>
-          <div class="col-md-6 mt-2 mt-sm-0">
+          <div class="col-md-6 mt-2 mt-sm-0 mx-auto">
             <div class="mb-2">
               {{ user_form.username.label_tag }}
               {{ user_form.username }}
@@ -60,7 +60,6 @@
             </div>
             <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
           </div>
-        </div>
       </form>
     </div>
   </div>
