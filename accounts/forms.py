@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
+from .models import Profile
+
 
 class RegisterForm(UserCreationForm):
     class Meta:
@@ -42,4 +44,29 @@ class UserUpdateForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+
+        fields = (
+            'avatar',
+            'bio',
+            'birth_date',
+        )
+        widgets = {
+            'bio': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 1,
+                }
+            ),
+            'birth_date': forms.DateInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'date',
+                }
+            ),
         }

@@ -5,7 +5,8 @@ from django.contrib.auth.views import LoginView
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from .forms import LoginForm, RegisterForm, UserUpdateForm
+from .forms import LoginForm, ProfileForm, RegisterForm, UserUpdateForm
+from .models import Profile
 
 
 def register(request: HttpRequest):
@@ -39,20 +40,42 @@ class CustomLoginView(LoginView):
 
 @login_required
 def profile(request: HttpRequest):
+    profile, _ = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST, instance=request.user)
-        if form.is_valid():
-            if form.has_changed():
-                form.save()
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            avatar_deleted = request.POST.get('avatar-deleted') == '1'
+            profile = profile_form.save(commit=False)
+
+            if avatar_deleted and profile.avatar:
+                profile.avatar.delete(save=False)
+                profile.avatar = None
+
+            has_changed = (
+                user_form.has_changed() or profile_form.has_changed() or avatar_deleted
+            )
+
+            if has_changed:
+                user_form.save()
+                profile.save()
                 messages.success(request, 'Profile updated')
             else:
                 messages.info(request, 'No changes were made')
             return redirect('profile')
     else:
-        form = UserUpdateForm(instance=request.user)
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileForm(instance=profile)
 
     notes_count = request.user.notes.count()
 
     return render(
-        request, 'accounts/profile.html', {'form': form, 'notes_count': notes_count}
+        request,
+        'accounts/profile.html',
+        {
+            'user_form': user_form,
+            'profile_form': profile_form,
+            'notes_count': notes_count,
+        },
     )

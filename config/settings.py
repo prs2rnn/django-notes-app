@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notes',
-    'accounts',
+    'accounts.apps.AccountsConfig',
     'core',
 ]
 
@@ -125,3 +125,7 @@ STATICFILES_DIRS = [
 # Redirects for LogoutView and LoginView
 LOGIN_REDIRECT_URL = 'notes_list'
 LOGOUT_REDIRECT_URL = 'login'
+
+# Media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

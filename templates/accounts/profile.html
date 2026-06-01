@@ -1,25 +1,61 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
   <div class="card">
-    <div class="card-header">Profile</div>
     <div class="card-body">
-      <form method="post">
+      <h2>Profile</h2>
+      <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
-        {% for field in form %}
-          <div class="mb-2">
-            <label class="form-label mb-0">{{ field.label }}</label>
-            {{ field }}
+        <div class="row">
+          <div class="col-md-6">
+            <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'img/default-avatar.webp' %}{% endif %}"
+                 id="avatar-preview"
+                 alt="Avatar"
+                 data-default-avatar="{% static 'img/default-avatar.webp' %}"
+                 data-has-avatar="{% if user.profile.avatar %}true{% else %}false{% endif %}"
+                 style="object-fit: cover"
+                 width="150"
+                 height="150">
+            <div class="mt-1">
+              <input type="file" name="avatar" id="id_avatar" class="d-none" accept="image/*">
+              <label for="id_avatar" class="btn btn-sm btn-outline-primary mt-1 mt-sm-0">Upload Avatar</label>
+              <input type="hidden" name="avatar-deleted" id="avatar-deleted" value="0">
+              <button type="button"
+                      id="delete-avatar-btn"
+                      class="btn btn-sm btn-outline-danger mt-1 mt-sm-0">Delete Avatar</button>
+            </div>
           </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">Save</button>
+          <div class="col-md-6 mt-2 mt-sm-0">
+            <div class="mb-2">
+              {{ user_form.username.label_tag }}
+              {{ user_form.username }}
+            </div>
+            <div class="mb-2">
+              {{ user_form.email.label_tag }}
+              {{ user_form.email }}
+            </div>
+            <div class="mb-2">
+              {{ user_form.first_name.label_tag }}
+              {{ user_form.first_name }}
+            </div>
+            <div class="mb-2">
+              {{ user_form.last_name.label_tag }}
+              {{ user_form.last_name }}
+            </div>
+            <div class="mb-2">
+              {{ profile_form.bio.label_tag }}
+              {{ profile_form.bio }}
+            </div>
+            <hr>
+            <div class="small text-muted">
+              Joined: {{ user.date_joined|date:"M d, Y" }}
+              <br>
+              Notes: {{ notes_count }}
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
+          </div>
+        </div>
       </form>
-      <p class="card-text mt-2">
-        Notes created: {{ user.notes.count }}
-        <br>
-        Joined: {{ user.date_joined|date:"M d, Y" }}
-        <br>
-        Last login: {{ user.last_login|date:"M d, Y H:i" }}
-      </p>
     </div>
   </div>
 {% endblock content %}
