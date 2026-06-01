@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, UserUpdateForm
 
 
 def register(request: HttpRequest):
@@ -39,4 +39,20 @@ class CustomLoginView(LoginView):
 
 @login_required
 def profile(request: HttpRequest):
-    return render(request, 'accounts/profile.html')
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            if form.has_changed():
+                form.save()
+                messages.success(request, 'Profile updated')
+            else:
+                messages.info(request, 'No changes were made')
+            return redirect('profile')
+    else:
+        form = UserUpdateForm(instance=request.user)
+
+    notes_count = request.user.notes.count()
+
+    return render(
+        request, 'accounts/profile.html', {'form': form, 'notes_count': notes_count}
+    )
