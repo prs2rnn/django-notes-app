@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="card mb-3">
+    <div class="card-header">Profile</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ user.username }}</h5>
+      <p class="card-text">
+        Email: {{ user.email|default:"Not specified" }}
+        <br>
+        Joined: {{ user.date_joined|date:"M d, Y" }}
+        <br>
+        Last login: {{ user.last_login|date:"M d, Y H:i" }}
+      </p>
+    </div>
+  </div>
+{% endblock content %}
