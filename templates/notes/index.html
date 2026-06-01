@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start">
+  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
     <a href="{% url 'note_create' %}" class="btn btn-outline-success"><i class="bi bi-plus-circle-fill"></i> Add note</a>
-    <form method="get" class="mt-1 mt-sm-0">
+    <form method="get" class="mt-1 mt-sm-0 d-flex flex-column flex-md-row">
+      <select name="sort"
+              class="form-select me-md-2 mb-1 mb-md-0 flex-shrink-0"
+              style="width: 150px"
+              onchange="this.form.submit()">
+        <option value="-created_at" {% if sort == '-created-at' %}selected{% endif %}>Newest</option>
+        <option value="created_at" {% if sort == 'created_at' %}selected{% endif %}>Oldest</option>
+        <option value="title" {% if sort == 'title' %}selected{% endif %}>Title A-Z</option>
+        <option value="-title" {% if sort == '-title' %}selected{% endif %}>Title Z-A</option>
+      </select>
       <div class="input-group">
         <input type="search"
                name="q"
@@ -33,18 +42,19 @@
     <ul class="pagination justify-content-center">
       {% if page_obj.has_previous %}
         <li class="page-item">
-          <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}"
+          <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.previous_page_number }}"
              class="page-link"><i class="bi bi-chevron-left"></i></a>
         </li>
       {% endif %}
       {% for num in page_range %}
         <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-          <a href="?q={{ query }}&page={{ num }}" class="page-link">{{ num }}</a>
+          <a href="?q={{ query }}&sort={{ sort }}&page={{ num }}"
+             class="page-link">{{ num }}</a>
         </li>
       {% endfor %}
       {% if page_obj.has_next %}
         <li class="page-item">
-          <a href="?q={{ query }}&page={{ page_obj.next_page_number }}"
+          <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.next_page_number }}"
              class="page-link"><i class="bi bi-chevron-right"></i></a>
         </li>
       {% endif %}

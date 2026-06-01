@@ -13,10 +13,22 @@ from .models import Note
 @login_required
 def notes_list(request: HttpRequest):
     query = request.GET.get('q', '')
-    notes = Note.objects.filter(author=request.user).order_by('-created_at')
+    sort = request.GET.get('sort', '-updated-at')
+    notes = Note.objects.filter(author=request.user)
 
     if query:
         notes = notes.filter(Q(title__icontains=query) | Q(body__icontains=query))
+
+    allowed_sort = {
+        'title': 'title',
+        '-title': '-title',
+        'created_at': 'created_at',
+        '-created_at': '-created_at',
+        'updated_at': 'updated_at',
+        '-updated_at': '-updated_at',
+    }
+
+    notes = notes.order_by(allowed_sort.get(sort, '-updated_at'))
 
     paginator = Paginator(notes, 10)
     page_number = request.GET.get('page')
@@ -30,7 +42,7 @@ def notes_list(request: HttpRequest):
     return render(
         request,
         'notes/index.html',
-        {'page_obj': page_obj, 'page_range': page_range, 'query': query},
+        {'page_obj': page_obj, 'page_range': page_range, 'query': query, 'sort': sort},
     )
 
 
