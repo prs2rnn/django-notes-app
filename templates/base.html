@@ -11,6 +11,8 @@
           type="image/svg" />
     <link rel="stylesheet"
           href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet"
+          href="{% static 'bootstrap/bootstrap-icons/bootstrap-icons.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}" defer></script>
   </head>
@@ -39,7 +41,7 @@
             <div class="dropdown">
               <button class='btn btn-outline-primary dropdown-toggle'
                       type="button"
-                      data-bs-toggle="dropdown">👤 {{ user.username }}</button>
+                      data-bs-toggle="dropdown"><i class="bi bi-person-circle"></i> {{ user.username }}</button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                   <a href="{% url 'notes_list' %}" class="dropdown-item">My Notes</a>

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-  <a href="{% url 'note_create' %}" class="btn btn-outline-success mt-1">➕ Add note</a>
+  <a href="{% url 'note_create' %}" class="btn btn-outline-success mt-1"><i class="bi bi-plus-circle-fill"></i> Add note</a>
   {% if notes %}
     <ul class="list-group my-3">
       {% for note in notes %}
@@ -9,7 +9,7 @@
           <p class="mb-0">
             <b>{{ note.title }}</b>
           </p>
-          <span class="text-muted">{{ note.created_at|date }}</span>
+          <span class="text-muted">{{ note.created_at|date:"M d, Y H:i" }}</span>
         </a>
       {% endfor %}
     </ul>
