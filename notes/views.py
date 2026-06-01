@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
@@ -10,9 +11,11 @@ from .models import Note
 
 @login_required
 def notes_list(request: HttpRequest):
+    query = request.GET.get('q', '')
     notes = Note.objects.filter(author=request.user)
-
-    return render(request, 'notes/index.html', {'notes': notes})
+    if query:
+        notes = notes.filter(Q(title__icontains=query) | Q(body__icontains=query))
+    return render(request, 'notes/index.html', {'notes': notes, 'query': query})
 
 
 @login_required

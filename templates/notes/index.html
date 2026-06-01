@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-  <a href="{% url 'note_create' %}" class="btn btn-outline-success mt-1"><i class="bi bi-plus-circle-fill"></i> Add note</a>
+  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start">
+    <a href="{% url 'note_create' %}" class="btn btn-outline-success"><i class="bi bi-plus-circle-fill"></i> Add note</a>
+    <form method="get" class="mt-1 mt-sm-0">
+      <div class="input-group">
+        <input type="search"
+               name="q"
+               value="{{ query }}"
+               class="form-control"
+               placeholder="Search notes...">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a href="{% url 'notes_list' %}" class="btn btn-outline-secondary">Clear</a>
+      </div>
+    </form>
+  </div>
   {% if notes %}
-    <ul class="list-group my-3">
+    <ul class="list-group my-2 my-sm-3">
       {% for note in notes %}
         <a href="{% url 'note_detail' note.id %}"
            class="list-group-item list-group-item-action mt-1 d-flex justify-content-between">
@@ -14,6 +27,6 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p class="my-2">There aren't notes yet</p>
+    <p class="my-2">No notes found</p>
   {% endif %}
 {% endblock content %}
