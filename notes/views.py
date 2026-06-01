@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
@@ -29,6 +30,7 @@ def note_create(request: HttpRequest):
             note = form.save(commit=False)
             note.author = request.user
             note.save()
+            messages.success(request, 'Note created')
             return redirect('notes_list')
     else:
         form = NoteForm()
@@ -41,7 +43,11 @@ def note_edit(request: HttpRequest, note_id):
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
-            form.save()
+            if form.has_changed():
+                form.save()
+                messages.success(request, 'Note updated')
+            else:
+                messages.info(request, 'No changes were made')
             return redirect('note_detail', note_id=note.id)
     else:
         form = NoteForm(instance=note)
@@ -58,6 +64,7 @@ def note_delete(request: HttpRequest, note_id):
 
     if request.method == 'POST':
         note.delete()
+        messages.warning(request, 'Note deleted')
         return redirect('notes_list')
 
     return render(request, 'notes/confirm_delete.html', {'note': note})

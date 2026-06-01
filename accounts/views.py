@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.http import HttpRequest
@@ -15,6 +16,9 @@ def register(request: HttpRequest):
         if form.is_valid():
             user = form.save()
             login(request, user)
+
+            messages.success(request, 'Account created')
+
             return redirect('notes_list')
     else:
         form = RegisterForm()
@@ -26,3 +30,7 @@ class CustomLoginView(LoginView):
     form_class = LoginForm
     template_name = 'registration/login.html'
     redirect_authenticated_user = True
+
+    def form_valid(self, form):
+        messages.success(self.request, f'Welcome back, {form.get_user().username}')
+        return super().form_valid(form)

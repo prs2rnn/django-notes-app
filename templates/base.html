@@ -41,7 +41,9 @@
             <div class="dropdown">
               <button class='btn btn-outline-primary dropdown-toggle'
                       type="button"
-                      data-bs-toggle="dropdown"><i class="bi bi-person-circle"></i> {{ user.username }}</button>
+                      data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle"></i> {{ user.username }}
+              </button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                   <a href="{% url 'notes_list' %}" class="dropdown-item">My Notes</a>
@@ -64,6 +66,22 @@
         </div>
       </div>
     </nav>
+    {% if messages %}
+      <div class="container mt-3">
+        {% for message in messages %}
+          <div class="alert alert-dismissible fade show
+                      {% if message.tags == 'error' %}
+                        alert-danger
+                      {% else %}
+                        alert-{{ message.tags }}
+                      {% endif %}"
+               role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
     <main class="container">
       {% block content %}
       {% endblock content %}
