@@ -22,7 +22,16 @@ def notes_list(request: HttpRequest):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'notes/index.html', {'page_obj': page_obj, 'query': query})
+    current = page_obj.number
+    start = max(current - 2, 1)
+    end = min(current + 2, paginator.num_pages)
+    page_range = range(start, end + 1)
+
+    return render(
+        request,
+        'notes/index.html',
+        {'page_obj': page_obj, 'page_range': page_range, 'query': query},
+    )
 
 
 @login_required
