@@ -23,6 +23,8 @@
               <button type="button"
                       id="delete-avatar-btn"
                       class="btn btn-sm btn-outline-danger mt-1 mt-sm-0">Delete Avatar</button>
+            {% for error in profile_form.avatar.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+
             </div>
           </div>
           <div class="col-md-6 mt-2 mt-sm-0">
@@ -45,6 +47,10 @@
             <div class="mb-2">
               {{ profile_form.bio.label_tag }}
               {{ profile_form.bio }}
+            </div>
+            <div class="mb-2">
+              {{ profile_form.birth_date.label_tag }}
+              {{ profile_form.birth_date }}
             </div>
             <hr>
             <div class="small text-muted">
