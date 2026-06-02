@@ -6,7 +6,7 @@ authors = [
     {name = "prs2rnn",email = "developer.prs2rnn@gmail.com"}
 ]
 license = {text = "MIT"}
-requires-python = ">=3.14"
+requires-python = ">=3.14,<4.0"
 dependencies = [
     "django (>=6.0.5,<7.0.0)",
     "pillow (>=12.2.0,<13.0.0)",
@@ -16,7 +16,8 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest (>=9.0.3,<10.0.0)",
-    "djlint (>=1.36.4,<2.0.0)"
+    "djlint (>=1.36.4,<2.0.0)",
+    "python-semantic-release (>=10.5.3,<11.0.0)"
 ]
 
 
@@ -26,3 +27,12 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 package-mode = false
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+branch = "master"
+commit_parser = "conventional"
+changelog_file = "CHANGELOG.md"
+upload_to_pypi = false
+major_on_zero = false
+allow_zero_version = true
