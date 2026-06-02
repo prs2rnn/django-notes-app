@@ -8,17 +8,17 @@ from .models import Profile
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = ("username", "password1", "password2")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['username'].label = 'Username'
-        self.fields['password1'].label = 'Password'
-        self.fields['password2'].label = 'Confirm password'
+        self.fields["username"].label = "Username"
+        self.fields["password1"].label = "Password"
+        self.fields["password2"].label = "Confirm password"
 
         for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs["class"] = "form-control"
 
 
 class LoginForm(AuthenticationForm):
@@ -26,7 +26,7 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
 
         for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs["class"] = "form-control"
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -34,16 +34,16 @@ class UserUpdateForm(forms.ModelForm):
         model = User
 
         fields = (
-            'username',
-            'email',
-            'first_name',
-            'last_name',
+            "username",
+            "email",
+            "first_name",
+            "last_name",
         )
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            "username": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.EmailInput(attrs={"class": "form-control"}),
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 
@@ -52,21 +52,21 @@ class ProfileForm(forms.ModelForm):
         model = Profile
 
         fields = (
-            'avatar',
-            'bio',
-            'birth_date',
+            "avatar",
+            "bio",
+            "birth_date",
         )
         widgets = {
-            'bio': forms.Textarea(
+            "bio": forms.Textarea(
                 attrs={
-                    'class': 'form-control',
-                    'rows': 1,
+                    "class": "form-control",
+                    "rows": 1,
                 }
             ),
-            'birth_date': forms.DateInput(
+            "birth_date": forms.DateInput(
                 attrs={
-                    'class': 'form-control',
-                    'type': 'date',
+                    "class": "form-control",
+                    "type": "date",
                 },
             ),
         }

@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("notes", "0006_alter_note_author"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

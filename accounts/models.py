@@ -6,9 +6,9 @@ from .validators import validate_avatar_extension, validate_avatar_size
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     avatar = models.ImageField(
-        upload_to='avatars/',
+        upload_to="avatars/",
         blank=True,
         null=True,
         validators=[validate_avatar_extension, validate_avatar_size],
