@@ -18,7 +18,8 @@ dependencies = [
 dev = [
     "pytest (>=9.0.3,<10.0.0)",
     "djlint (>=1.36.4,<2.0.0)",
-    "python-semantic-release (>=10.5.3,<11.0.0)"
+    "python-semantic-release (>=10.5.3,<11.0.0)",
+    "ruff (>=0.15.15,<0.16.0)"
 ]
 
 
