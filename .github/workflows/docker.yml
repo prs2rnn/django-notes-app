@@ -1,9 +1,10 @@
 name: Docker
 
 on:
-  release:
+  workflow_run:
+    workflows: ["Release"]
     types:
-      - published
+      - completed
 
 permissions:
   contents: read
@@ -11,13 +12,18 @@ permissions:
 
 jobs:
   docker:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Release Tag
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
+
+      - name: Get latest tag
+        id: tag
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
 
       - name: Login to GHCR
         uses: docker/login-action@v3
@@ -31,10 +37,8 @@ jobs:
         with:
           context: .
           push: true
-
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
-
+            ghcr.io/${{ github.repository }}:${{ steps.tag.outputs.tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
