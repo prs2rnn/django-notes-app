@@ -18,18 +18,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
+          ref: master
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.14"
 
-      - run: pip install poetry
+      - name: Install Poetry
+        run: pip install poetry
 
-      - run: poetry install
+      - name: Install dependencies
+        run: poetry install
 
-      - uses: python-semantic-release/python-semantic-release@v10
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Semantic Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI: true
+          GITHUB_REF_NAME: master
+        run: poetry run semantic-release version
