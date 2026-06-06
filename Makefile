@@ -20,3 +20,6 @@ startapp:
 
 collectstatic:
 	poetry run python manage.py collectstatic
+
+ruff:
+	poetry run ruff check . && poetry run ruff format --check .
