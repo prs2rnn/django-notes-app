@@ -6,7 +6,7 @@ class Setting(BaseSettings):
     SECRET_KEY: str = "very-secret-key"
     DEBUG: bool = True
     ALLOWED_HOSTS: str = "127.0.0.1,localhost"
-    CSRF_TRUSTED_ORIGINS: str = "https://your_domain"
+    CSRF_TRUSTED_ORIGINS: str = "http://your_domain"
     HTTPS_ENABLED: bool = False
 
     DB_ENGINE: str = "sqlite"

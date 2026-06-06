@@ -27,8 +27,7 @@ SECRET_KEY = setting.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = setting.DEBUG
 
-ALLOWED_HOSTS = setting.ALLOWED_HOSTS.split(",")
-
+ALLOWED_HOSTS = [host.strip() for host in setting.ALLOWED_HOSTS.split(",")]
 
 # Application definition
 
@@ -155,7 +154,11 @@ SECURE_PROXY_SSL_HEADER = (
 SESSION_COOKIE_SECURE = setting.HTTPS_ENABLED
 CSRF_COOKIE_SECURE = setting.HTTPS_ENABLED
 SECURE_SSL_REDIRECT = setting.HTTPS_ENABLED
-CSRF_TRUSTED_ORIGINS = setting.CSRF_TRUSTED_ORIGINS.split(",")
+CSRF_TRUSTED_ORIGINS = (
+    [host.strip() for host in setting.CSRF_TRUSTED_ORIGINS.split(",")]
+    if setting.CSRF_TRUSTED_ORIGINS
+    else []
+)
 SECURE_HSTS_SECONDS = 31536000 if setting.HTTPS_ENABLED else 0
 SECURE_HSTS_INCLUDE_SUBDOMAINS = setting.HTTPS_ENABLED
 SECURE_HSTS_PRELOAD = setting.HTTPS_ENABLED
