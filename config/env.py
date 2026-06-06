@@ -5,7 +5,9 @@ class Setting(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
     SECRET_KEY: str = "very-secret-key"
     DEBUG: bool = True
-    ALLOWED_HOSTS: str = "127.0.0.1,localhost"
+    ALLOWED_HOSTS: list[str]
+    CSRF_TRUSTED_ORIGINS: list[str]
+    HTTPS_ENABLED: bool = False
 
     DB_ENGINE: str = "sqlite"
     DB_NAME: str = "db.sqlite3"
