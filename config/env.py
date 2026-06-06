@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Setting(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(extra="ignore")
     SECRET_KEY: str = "very-secret-key"
     DEBUG: bool = True
     ALLOWED_HOSTS: str = "127.0.0.1,localhost"
