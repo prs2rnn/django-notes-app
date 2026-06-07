@@ -39,8 +39,8 @@ test:
 	poetry run pytest
 
 ci:
-	$(MAKE) check
-# 	$(MAKE) test
+	make check
+# 	make test
 
 install-hooks:
 	./scripts/install-hooks.sh
