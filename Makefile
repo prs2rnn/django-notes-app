@@ -21,5 +21,15 @@ startapp:
 collectstatic:
 	poetry run python manage.py collectstatic
 
-ruff:
-	poetry run ruff check . && poetry run ruff format --check .
+check:
+	poetry run ruff check .
+	poetry run ruff format --check .
+	poetry run python manage.py check
+	poetry run python manage.py makemigrations --check --dry-run
+
+test:
+	poetry run pytest
+
+ci:
+	make check
+	make test
