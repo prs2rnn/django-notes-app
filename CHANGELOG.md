@@ -2,6 +2,37 @@
 
 <!-- version list -->
 
+## v0.1.2 (2026-06-07)
+
+### Bug Fixes
+
+- Update templates
+  ([`e0dba73`](https://github.com/prs2rnn/django-notes-app/commit/e0dba73aee3cbcf65ac37b970a87b89029ed16f5))
+
+### Chores
+
+- Add docker-compose for ssl
+  ([`bf2f61a`](https://github.com/prs2rnn/django-notes-app/commit/bf2f61a0a8a662a40f2e9ad7b6ab650adf29343f))
+
+- Add git hooks
+  ([`3540201`](https://github.com/prs2rnn/django-notes-app/commit/3540201cd02b26d6ecde03ba821a23e2bd38339b))
+
+- Admin panel url
+  ([`008d131`](https://github.com/prs2rnn/django-notes-app/commit/008d1319384beebbe09b463121a5625ece8c9f83))
+
+- Caddy
+  ([`d40facd`](https://github.com/prs2rnn/django-notes-app/commit/d40facde3d58d30f3be9d6a302eae94ca128b871))
+
+- Fix caddy
+  ([`ff6c840`](https://github.com/prs2rnn/django-notes-app/commit/ff6c84075f02fa861e142ce87f65190f4004494c))
+
+- Fix ci in makefile
+  ([`b2bdd5d`](https://github.com/prs2rnn/django-notes-app/commit/b2bdd5d9505cefc33c7b541221f95dd5649cc48b))
+
+- Scripts
+  ([`68a237e`](https://github.com/prs2rnn/django-notes-app/commit/68a237e89ea18549fcfb4ad89338cc0a8add7a41))
+
+
 ## v0.1.1 (2026-06-06)
 
 ### Bug Fixes
