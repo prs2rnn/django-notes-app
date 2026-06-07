@@ -1,6 +1,5 @@
 #!/bin/sh
 
 docker compose \
--f compose.prod.yml \
--f compose.ssl.yml \
+-f docker-compose.prod.yml \
 logs -f

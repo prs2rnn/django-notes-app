@@ -57,17 +57,17 @@ docker-logs:
 # Production
 prod-down:
 	docker compose \
-	-f compose.prod.yml \
+	-f docker-compose.prod.yml \
 	down
 
 prod-shell:
 	docker compose \
-	-f compose.prod.yml \
+	-f docker-compose.prod.yml \
 	exec web python manage.py shell
 
 prod-admin:
 	docker compose \
-	-f compose.prod.yml \
+	-f docker-compose.prod.yml \
 	exec web python manage.py createsuperuser
 
 deploy:
