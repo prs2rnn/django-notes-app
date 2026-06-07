@@ -1,0 +1,16 @@
+noteflow.prs2rnn.tech {
+
+    encode gzip
+
+    reverse_proxy web:8000
+
+    handle_path /static/* {
+        root * /static
+        file_server
+    }
+
+    handle_path /media/* {
+        root * /media
+        file_server
+    }
+}

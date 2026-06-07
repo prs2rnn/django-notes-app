@@ -58,13 +58,11 @@ docker-logs:
 prod-down:
 	docker compose \
 	-f compose.prod.yml \
-	-f compose.ssl.yml \
 	down
 
 prod-shell:
 	docker compose \
 	-f compose.prod.yml \
-	-f compose.ssl.yml \
 	exec web python manage.py shell
 
 prod-admin:
@@ -74,12 +72,6 @@ prod-admin:
 
 deploy:
 	./scripts/deploy.sh
-
-ssl:
-	./scripts/issue-certificate.sh
-
-restart:
-	./scripts/restart-web.sh
 
 logs:
 	./scripts/logs.sh
